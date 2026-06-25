@@ -1,0 +1,6 @@
+{
+  "name": "JanSeva",
+  "description": "A production-ready civic issue reporting platform for citizens and city officials with AI vision triage, verification workflows, interactive maps, gamified leaderboards, and staff operations.",
+  "requestFramePermissions": ["geolocation", "camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

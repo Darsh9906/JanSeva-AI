@@ -1,0 +1,272 @@
+import { Issue, User, Comment, Reward, Verification } from "../types";
+
+export const INITIAL_USERS: User[] = [
+  {
+    id: "user_citizen_1",
+    name: "Elena Rostova",
+    email: "elena.rostova@gmail.com",
+    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
+    heroPoints: 340,
+    role: "citizen",
+    reportsCount: 8,
+    resolvedCount: 5,
+    badges: ["First Report 🎖️", "Verified Neighbor 🛡️", "Top Citizen ⭐"],
+    createdAt: "2026-01-15T08:30:00Z"
+  },
+  {
+    id: "user_officer_roads",
+    name: "Officer Marcus Vance",
+    email: "m.vance@citygov.org",
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80",
+    heroPoints: 520,
+    role: "officer",
+    department: "Public Works - Roads",
+    reportsCount: 12,
+    resolvedCount: 28,
+    badges: ["Fix Master 🛠️", "Road Guardian 🚧", "Speedy Dispatch ⚡"],
+    createdAt: "2025-11-01T10:00:00Z"
+  },
+  {
+    id: "user_admin_1",
+    name: "Director David Thorne",
+    email: "d.thorne@citygov.org",
+    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&auto=format&fit=crop&q=80",
+    heroPoints: 890,
+    role: "admin",
+    department: "Public Works - Roads",
+    reportsCount: 15,
+    resolvedCount: 64,
+    badges: ["City Builder 🏛️", "Executive Overseer 👑", "Fix Master 🛠️"],
+    createdAt: "2025-06-10T09:00:00Z"
+  },
+  {
+    id: "user_citizen_2",
+    name: "Jamal Crawford",
+    email: "jamal.c@community.org",
+    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80",
+    heroPoints: 210,
+    role: "citizen",
+    reportsCount: 5,
+    resolvedCount: 3,
+    badges: ["First Report 🎖️", "Eco Warrior 🌿"],
+    createdAt: "2026-02-02T14:20:00Z"
+  },
+  {
+    id: "user_citizen_3",
+    name: "Sofia Rodriguez",
+    email: "s.rodriguez@tech.io",
+    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80",
+    heroPoints: 445,
+    role: "citizen",
+    reportsCount: 11,
+    resolvedCount: 8,
+    badges: ["First Report 🎖️", "Verified Neighbor 🛡️", "Civic Champion 🏆"],
+    createdAt: "2025-12-20T11:15:00Z"
+  }
+];
+
+export const INITIAL_ISSUES: Issue[] = [
+  {
+    id: "iss_101",
+    title: "Severe Deep Pothole on 5th & Main",
+    description: "Large 3-foot wide pothole exposing underlying rebar. Has caused tire damage to at least two vehicles this morning. Immediate asphalt fill required.",
+    category: "Pothole",
+    severity: "Critical",
+    status: "In Progress",
+    department: "Public Works - Roads",
+    confidence: 0.96,
+    riskScore: 88,
+    estimatedCost: 450,
+    estimatedFixTime: "24 hours",
+    latitude: 37.7749,
+    longitude: -122.4194,
+    address: "482 5th St, Financial District",
+    imageUrl: "https://images.unsplash.com/photo-1515162816999-a0c47dc192f7?w=800&auto=format&fit=crop&q=80",
+    mediaType: "photo",
+    verificationStatus: "Verified",
+    confirmCount: 14,
+    upvoteCount: 32,
+    rejectCount: 1,
+    commentCount: 4,
+    createdBy: "user_citizen_1",
+    createdByName: "Elena Rostova",
+    assignedTo: "user_officer_roads",
+    assignedOfficerName: "Officer Marcus Vance",
+    timeline: [
+      { status: "Reported", at: "2026-06-23T08:14:00Z", note: "Reported via mobile app with AI photo triage.", by: "Elena Rostova" },
+      { status: "Verified", at: "2026-06-23T10:30:00Z", note: "Confirmed by 14 nearby residents within 2 hours.", by: "Community Consensus" },
+      { status: "Assigned", at: "2026-06-23T12:00:00Z", note: "Auto-routed to Roads Department active queue.", by: "System Triage Engine" },
+      { status: "In Progress", at: "2026-06-24T07:45:00Z", note: "Crews dispatched with hot mix asphalt truck #42.", by: "Officer Marcus Vance" }
+    ],
+    createdAt: "2026-06-23T08:14:00Z",
+    updatedAt: "2026-06-24T07:45:00Z"
+  },
+  {
+    id: "iss_102",
+    title: "High Pressure Water Main Leakage",
+    description: "Continuous stream of clean municipal water bubbling up through sidewalk cracks near the park entrance. Pressure drops reported in nearby apartment block.",
+    category: "Water Leakage",
+    severity: "High",
+    status: "Assigned",
+    department: "Water & Sanitation",
+    confidence: 0.94,
+    riskScore: 75,
+    estimatedCost: 1200,
+    estimatedFixTime: "2 days",
+    latitude: 37.7833,
+    longitude: -122.4167,
+    address: "120 Maple Ave, Parkside",
+    imageUrl: "https://images.unsplash.com/photo-1542013936693-859e53936323?w=800&auto=format&fit=crop&q=80",
+    mediaType: "photo",
+    verificationStatus: "Verified",
+    confirmCount: 9,
+    upvoteCount: 19,
+    rejectCount: 0,
+    commentCount: 2,
+    createdBy: "user_citizen_3",
+    createdByName: "Sofia Rodriguez",
+    assignedTo: "dept_water",
+    assignedOfficerName: "Water Emergency Team A",
+    timeline: [
+      { status: "Reported", at: "2026-06-23T16:20:00Z", note: "Citizen logged water loss anomaly.", by: "Sofia Rodriguez" },
+      { status: "Verified", at: "2026-06-23T18:10:00Z", note: "Neighbors verified pressure drop.", by: "Community Consensus" },
+      { status: "Assigned", at: "2026-06-24T09:00:00Z", note: "Assigned to Water Emergency Dispatch.", by: "Director David Thorne" }
+    ],
+    createdAt: "2026-06-23T16:20:00Z",
+    updatedAt: "2026-06-24T09:00:00Z"
+  },
+  {
+    id: "iss_103",
+    title: "Broken Streetlight & Flickering Fixture",
+    description: "Overhead LED streetlight is completely dark creating a dark pocket near the crosswalk. Poses pedestrian safety concern at night.",
+    category: "Streetlight",
+    severity: "Medium",
+    status: "Reported",
+    department: "Electrical Dept",
+    confidence: 0.89,
+    riskScore: 52,
+    estimatedCost: 250,
+    estimatedFixTime: "3 days",
+    latitude: 37.7694,
+    longitude: -122.4281,
+    address: "89 Pine St Corridor",
+    imageUrl: "https://images.unsplash.com/photo-1513694203232-719a280e022f?w=800&auto=format&fit=crop&q=80",
+    mediaType: "photo",
+    verificationStatus: "Likely Verified",
+    confirmCount: 4,
+    upvoteCount: 7,
+    rejectCount: 0,
+    commentCount: 1,
+    createdBy: "user_citizen_2",
+    createdByName: "Jamal Crawford",
+    timeline: [
+      { status: "Reported", at: "2026-06-24T02:15:00Z", note: "Night shift citizen report submitted.", by: "Jamal Crawford" }
+    ],
+    createdAt: "2026-06-24T02:15:00Z",
+    updatedAt: "2026-06-24T02:15:00Z"
+  },
+  {
+    id: "iss_104",
+    title: "Illegal Waste Dump & Construction Debris",
+    description: "Pile of discarded lumber, broken drywall, and old paint cans obstructing public alleyway 4B.",
+    category: "Waste Management",
+    severity: "High",
+    status: "Resolved",
+    department: "Waste Management",
+    confidence: 0.98,
+    riskScore: 65,
+    estimatedCost: 300,
+    estimatedFixTime: "1 day",
+    latitude: 37.7791,
+    longitude: -122.4089,
+    address: "Alley 4B off Howard St",
+    imageUrl: "https://images.unsplash.com/photo-1530587191325-3db32d826c18?w=800&auto=format&fit=crop&q=80",
+    mediaType: "photo",
+    verificationStatus: "Verified",
+    confirmCount: 11,
+    upvoteCount: 24,
+    rejectCount: 0,
+    commentCount: 3,
+    createdBy: "user_citizen_1",
+    createdByName: "Elena Rostova",
+    assignedTo: "dept_waste",
+    assignedOfficerName: "Sanitation Rapid Response",
+    resolutionNote: "Debris cleared and recycled. Area sanitized and warning signage posted.",
+    resolvedBy: "Sanitation Rapid Response",
+    timeline: [
+      { status: "Reported", at: "2026-06-21T11:00:00Z", note: "Reported with AI waste analysis.", by: "Elena Rostova" },
+      { status: "Verified", at: "2026-06-21T13:40:00Z", note: "Verified by local businesses.", by: "Community Consensus" },
+      { status: "Assigned", at: "2026-06-22T08:00:00Z", note: "Routed to Sanitation.", by: "System Engine" },
+      { status: "In Progress", at: "2026-06-22T14:00:00Z", note: "Clearing crew on site.", by: "Sanitation Rapid Response" },
+      { status: "Resolved", at: "2026-06-22T17:30:00Z", note: "Completely resolved. Photo proof logged.", by: "Sanitation Rapid Response" }
+    ],
+    createdAt: "2026-06-21T11:00:00Z",
+    updatedAt: "2026-06-22T17:30:00Z"
+  },
+  {
+    id: "iss_105",
+    title: "Clogged Storm Drain Flooding Intersection",
+    description: "Storm drain grating is packed with silt and fallen leaves causing standing water across crosswalk.",
+    category: "Drainage",
+    severity: "Medium",
+    status: "Verified",
+    department: "Public Works - Roads",
+    confidence: 0.91,
+    riskScore: 58,
+    estimatedCost: 180,
+    estimatedFixTime: "24 hours",
+    latitude: 37.7712,
+    longitude: -122.4345,
+    address: "310 Grand Ave",
+    imageUrl: "https://images.unsplash.com/photo-1541888946425-d0fbb18f0317?w=800&auto=format&fit=crop&q=80",
+    mediaType: "photo",
+    verificationStatus: "Verified",
+    confirmCount: 6,
+    upvoteCount: 12,
+    rejectCount: 0,
+    commentCount: 1,
+    createdBy: "user_citizen_3",
+    createdByName: "Sofia Rodriguez",
+    timeline: [
+      { status: "Reported", at: "2026-06-23T20:10:00Z", note: "Reported during evening commute.", by: "Sofia Rodriguez" },
+      { status: "Verified", at: "2026-06-24T08:00:00Z", note: "Verified by morning pedestrians.", by: "Community Consensus" }
+    ],
+    createdAt: "2026-06-23T20:10:00Z",
+    updatedAt: "2026-06-24T08:00:00Z"
+  }
+];
+
+export const INITIAL_COMMENTS: Comment[] = [
+  {
+    id: "com_1",
+    issueId: "iss_101",
+    userId: "user_officer_roads",
+    userName: "Officer Marcus Vance",
+    userAvatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80",
+    message: "We have prioritized this pothole on our morning schedule. Please keep clear of traffic cones.",
+    createdAt: "2026-06-24T07:50:00Z"
+  },
+  {
+    id: "com_2",
+    issueId: "iss_101",
+    userId: "user_citizen_2",
+    userName: "Jamal Crawford",
+    userAvatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80",
+    message: "Thank you Marcus! Almost popped my front right tire on this one yesterday.",
+    createdAt: "2026-06-24T08:15:00Z"
+  },
+  {
+    id: "com_3",
+    issueId: "iss_104",
+    userId: "user_citizen_1",
+    userName: "Elena Rostova",
+    userAvatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
+    message: "Amazing turnaround speed! The alley looks completely clean now.",
+    createdAt: "2026-06-22T18:00:00Z"
+  }
+];
+
+export const INITIAL_VERIFICATIONS: Verification[] = [
+  { id: "ver_1", issueId: "iss_101", userId: "user_citizen_2", userName: "Jamal Crawford", voteType: "confirm", createdAt: "2026-06-23T09:00:00Z" },
+  { id: "ver_2", issueId: "iss_101", userId: "user_citizen_3", userName: "Sofia Rodriguez", voteType: "upvote", createdAt: "2026-06-23T09:30:00Z" }
+];
